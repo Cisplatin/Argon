@@ -12,16 +12,6 @@ class BinNum(structures.basenum.BaseNum):
   def to_hex(self):
     return structures.hexnum.HexNum('{0:x}'.format(int(self.data, self.BASE)))
 
-  # @return [BinNum] The value of self << 1
-  def shift_left(self):
-    return self.__class__(self.data + '0')
-
-  # @return [BinNum] The value of self >> 1
-  def shift_right(self):
-    if self.data == '0':
-        return self
-    return self.__class__(self.data[:-1])
-
   # @return [Bool] The parity of the string. False if even, True if odd.
   def parity(self):
     return reduce(lambda x, y: x ^ bool(y), self.data, False)
