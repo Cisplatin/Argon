@@ -12,6 +12,16 @@ class BinNum(structures.basenum.BaseNum):
   def to_hex(self):
     return structures.hexnum.HexNum('{0:x}'.format(int(self.data, self.BASE)))
 
+  # @return [BinNum] The value of self << 1
+  def shift_left(self):
+    return self.__class__(self.data + '0')
+
+  # @return [BinNum] The value of self >> 1
+  def shift_right(self):
+    if self.data == '0':
+        return self
+    return self.__class__(self.data[:-1])
+
   # @param func [Bool x Bool -> Bool] The bitwise function to perform
   # @param str_1 [BinNum] The first string to bitwise operate on
   # @param str_2 [BinNum] The second string to bitwise operate on
