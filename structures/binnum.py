@@ -1,9 +1,6 @@
 import structures.basenum
 import structures.hexnum
 
-# TODO: Why won't this line work?
-# HexNum = structures.hexnum.HexNum
-
 class BinNum(structures.basenum.BaseNum):
   BASE = 2
 
