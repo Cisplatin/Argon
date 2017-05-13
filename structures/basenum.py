@@ -28,7 +28,6 @@ class BaseNum:
   @staticmethod
   def normalize_length(str_1, str_2):
     if str_1.length() < str_2.length():
-        str_1 = str_1.pad(str_2.length())
-    elif str_2.length() < str_1.length():
-        str_2 = str_2.pad(str_1.length())
-    return str_1, str_2
+        return str_1.pad(str_2.length()), str_2
+    elif str_2.length() <= str_1.length():
+        return str_1, str_2.pad(str_1.length())

@@ -32,27 +32,21 @@ class BinNum(structures.basenum.BaseNum):
   # @return [BinNum] The result of func(str_1, str_2)
   @staticmethod
   def bitwise(func, str_1, str_2):
-    str_1, str_2 = self.__class__.normalize_length(str_1, str_2)
+    str_1, str_2 = BinNum.normalize_length(str_1, str_2)
     bits = map(lambda x: func(*x), zip(str_1.bits(), str_2.bits()))
-    return self.__class__(''.join(map(str, bits)))
+    return BinNum(''.join(map(str, bits)))
 
-  # @param str_1 [BinNum] The first string to XOR with
-  # @param str_2 [BinNum] The second string to XOR with
+  # @param other [BinNum] The string to XOR with
   # @return [BinNum] The result of str_1 ^ str_2
-  @staticmethod
-  def bitwise_xor(str_1, str_2):
-    return self.__class__.bitwise(lambda x, y: x ^ y, str_1, str_2)
+  def __xor__(self, other):
+    return self.__class__.bitwise(lambda x, y: x ^ y, self, other)
 
-  # @param str_1 [BinNum] The first string to AND with
-  # @param str_2 [BinNum] The second string to AND with
+  # @param other [BinNum] The string to AND with
   # @return [BinNum]  The result of str_1 & str_2
-  @staticmethod
-  def bitwise_and(str_1, str_2):
-    return self.__class__.bitwise(lambda x, y: x & y, str_1, str_2)
+  def __and__(self, other):
+    return self.__class__.bitwise(lambda x, y: x & y, self, other)
 
-  # @param str_1 [BinNum] The first string to OR with
-  # @param str_2 [BinNum] The second string to OR with
+  # @param other [BinNum] The string to OR with
   # @return [BinNum]  The result of str_1 | str_2
-  @staticmethod
-  def bitwise_or(str_1, str_2):
-    return self.__class__.bitwise(lambda x, y: x | y, str_1, str_2)
+  def __or__(self, other):
+    return self.__class__.bitwise(lambda x, y: x | y, self, other)
