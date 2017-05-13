@@ -57,8 +57,15 @@ class HexNum(BaseNum):
   # @param str_2 [HexNum] The second string to AND with
   # @return [HexNum] The result of str_1 & str_2
   @staticmethod
-  def bitwise_xor(str_1, str_2):
+  def bitwise_and(str_1, str_2):
     return BinNum.bitwise_and(str_1.to_bin(), str_2.to_bin()).to_hex()
+
+  # @param str_1 [HexNum] The first string to OR with
+  # @param str_2 [HexNum] The second string to OR with
+  # @return [HexNum] The result of str_1 | str_2
+  @staticmethod
+  def bitwise_or(str_1, str_2):
+    return BinNum.bitwise_or(str_1.to_bin(), str_2.to_bin()).to_hex()
 
 class BinNum(BaseNum):
   BASE = 2
@@ -94,3 +101,10 @@ class BinNum(BaseNum):
   @staticmethod
   def bitwise_and(str_1, str_2):
     return BinNum.bitwise(lambda x, y: x & y, str_1, str_2)
+
+  # @param str_1 [BinNum] The first string to OR with
+  # @param str_2 [BinNum] The second string to OR with
+  # @return [BinNum]  The result of str_1 | str_2
+  @staticmethod
+  def bitwise_or(str_1, str_2):
+    return BinNum.bitwise(lambda x, y: x | y, str_1, str_2)
