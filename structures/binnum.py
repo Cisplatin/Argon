@@ -22,6 +22,10 @@ class BinNum(structures.basenum.BaseNum):
         return self
     return self.__class__(self.data[:-1])
 
+  # @return [Bool] The parity of the string. False if even, True if odd.
+  def parity(self):
+    return reduce(lambda x, y: x ^ bool(y), self.data, False)
+
   # @param func [Bool x Bool -> Bool] The bitwise function to perform
   # @param str_1 [BinNum] The first string to bitwise operate on
   # @param str_2 [BinNum] The second string to bitwise operate on
