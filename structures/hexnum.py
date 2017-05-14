@@ -6,6 +6,10 @@ BinNum = structures.binnum.BinNum
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
 
+  # @return [String] The ASCII string representing self.data
+  def to_ASCII(self):
+    return self.data.decode('hex')
+
   # @return [String] The base64 string representing self.data
   def to_base64(self):
     return self.data.decode('hex').encode('base64')
