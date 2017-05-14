@@ -8,11 +8,17 @@ def single_byte_xor(ciphertext):
   frequency = letter_frequency()
   best_plaintext = None
   best_score = 0
+
   for i in xrange(ord('a'), ord('z') + 1):
+
+    # Find the XOR of our cipher text with a repeated byte.
     xor = chr(i).encode('hex')
     plaintext = ciphertext ^ HexNum(xor * (len(ciphertext) / len(xor)))
     sentence = plaintext.to_ASCII()
 
+    # Track the frequency of each letter in the ASCII. If an invalid character
+    # is found (i.e. a letter before Space in ASCII) then we move onto the next
+    # sentence.
     plaintext_freq = { i : 0 for i in frequency }
     invalid_character = False
     for char in sentence:
@@ -23,6 +29,8 @@ def single_byte_xor(ciphertext):
     if invalid_character:
       continue
 
+    # Find the ordered list of how frequent each letter is. The earlier a letter
+    # is in the list, the more common it is.
     letters = sorted(plaintext_freq, key=plaintext_freq.get, reverse=True)
 
     # @param index [Integer] The frequency of a certain letter in plaintext
@@ -35,6 +43,9 @@ def single_byte_xor(ciphertext):
     def english_index(index):
         return frequency.index(letters[index])
 
+    # Some letters in the sentence will have the same count. This moves around
+    # letters like these so that the array can as close as possible match
+    # plaintext_freq's ordering (without ruining the ordering by frequency).
     count = 0
     while count < len(letters) - 1:
         if plain_index(count) == plain_index(count + 1) and \
@@ -45,6 +56,9 @@ def single_byte_xor(ciphertext):
         else:
           count += 1
 
+    # We now judge how valid a sentence is by the distance from the sentence's
+    # frequency hash to the English language's frequency hash. The score
+    # is the sum of all distances.
     score = sum(map(lambda x: abs(english_index(x) - x), xrange(len(letters))))
     if score > best_score:
       best_plaintext = sentence
