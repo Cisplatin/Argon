@@ -46,4 +46,6 @@ class BinNum(structures.basenum.BaseNum):
   # @return [Integer] The hamming distance
   @staticmethod
   def hamming_distance(str_1, str_2):
+    if len(str_1) != len(str_2):
+      raise ValueError('Strings must be equal length.')
     return sum(char_1 != char_2 for char_1, char_2 in zip(str_1, str_2))
