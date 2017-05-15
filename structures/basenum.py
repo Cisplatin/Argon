@@ -21,6 +21,11 @@ class BaseNum:
   def pad(self, length, pad='0'):
     return self.__class__((length - len(self)) * pad + self.data)
 
+  # @param length [Integer] The maximal length to trim at.
+  # @return [BaseNum] The trimmed string.
+  def trim(self, length):
+    return self.__class__(self.data[:length])
+
   # @param str_1 [BaseNum] The first string to make of equal length
   # @param str_2 [BaseNum] The second string to make of equal length
   # @return [BaseNum, BaseNum] The two strings, now of equal length
