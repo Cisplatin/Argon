@@ -40,3 +40,10 @@ class BinNum(structures.basenum.BaseNum):
   # @return [BinNum]  The result of str_1 | str_2
   def __or__(self, other):
     return self.__class__.bitwise(lambda x, y: x | y, self, other)
+
+  # @param str_1 [BaseNum] The first number to compare
+  # @param str_2 [BaseNum] The second number to compare (of equal length)
+  # @return [Integer] The hamming distance
+  @staticmethod
+  def hamming_distance(str_1, str_2):
+    return sum(char_1 != char_2 for char_1, char_2 in zip(str_1, str_2))
