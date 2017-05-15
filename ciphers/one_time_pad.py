@@ -2,4 +2,4 @@
 # @param key [HexNum] The key to encrypt/decrypt with.
 # @return [HexNum] The ciphertext/plaintext
 def one_time_pad(text, key):
-  pass
+  return text ^ key.repeat(len(text))

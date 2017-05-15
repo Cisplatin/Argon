@@ -16,11 +16,6 @@ class BinNum(structures.basenum.BaseNum):
   def parity(self):
     return reduce(lambda x, y: x ^ bool(y), self.data, False)
 
-  # @param length [Integer] The final length of the string
-  # @return [BinNum] The same string but repeated to be of proper length
-  def repeat(self, length):
-    return self.pad(length, self.data)
-
   # @param func [Bool x Bool -> Bool] The bitwise function to perform
   # @param str_1 [BinNum] The first string to bitwise operate on
   # @param str_2 [BinNum] The second string to bitwise operate on

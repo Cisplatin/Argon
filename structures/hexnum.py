@@ -10,6 +10,12 @@ class HexNum(structures.basenum.BaseNum):
   def to_ASCII(self):
     return self.data.decode('hex')
 
+  # @param string [String] The ASCII string to convert
+  # @return [HexNum] The HexNum equivalent of the given ASCII
+  @staticmethod
+  def from_ASCII(string):
+    return HexNum(string.encode('hex'))
+
   # @return [String] The base64 string representing self.data
   def to_base64(self):
     return self.data.decode('hex').encode('base64')

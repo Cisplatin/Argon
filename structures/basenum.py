@@ -26,6 +26,11 @@ class BaseNum:
   def trim(self, length):
     return self.__class__(self.data[:length])
 
+  # @param length [Integer] The final length of the string
+  # @return [BinNum] The same string but repeated to be of proper length
+  def repeat(self, length):
+    return self.pad(length, self.data)
+
   # @param str_1 [BaseNum] The first string to make of equal length
   # @param str_2 [BaseNum] The second string to make of equal length
   # @return [BaseNum, BaseNum] The two strings, now of equal length
