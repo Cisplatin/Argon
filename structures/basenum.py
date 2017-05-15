@@ -19,7 +19,7 @@ class BaseNum:
   # @param pad [String] The pad to use. Default is '0'.
   # @return [BaseNum] The number of pads to prepend.
   def pad(self, length, pad='0'):
-    return self.__class__((length - len(self)) * pad + self.data)
+    return self.__class__((length - len(self)) * pad + self.data).trim(length)
 
   # @param length [Integer] The maximal length to trim at.
   # @return [BaseNum] The trimmed string.
