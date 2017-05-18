@@ -64,3 +64,10 @@ class BaseNum:
     if len(str_1) != len(str_2):
       raise ValueError('Strings must be equal length.')
     return sum(char_1 != char_2 for char_1, char_2 in zip(str_1, str_2))
+
+  # @param other [BaseNum] The other BaseNum added to.
+  # @return [BaseNum] The sum of the two BaseNums.
+  def __add__(self, other):
+    if self.__class__ != other.__class__:
+      raise ValueError('Cannot add two BaseNums of different types.')
+    return self.__class__.from_integer(self.to_integer() + other.to_integer())

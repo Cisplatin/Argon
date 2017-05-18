@@ -8,6 +8,7 @@ class HexNum(structures.basenum.BaseNum):
 
   # @param integer [Integer] The integer to convert.
   # @return [HexNum] The given integer converted into a HexNum.
+  @staticmethod
   def from_integer(integer):
     return HexNum("{0:x}".format(integer))
 
