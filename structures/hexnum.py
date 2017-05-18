@@ -16,10 +16,6 @@ class HexNum(structures.basenum.BaseNum):
   def from_ASCII(string):
     return HexNum(string.encode('hex'))
 
-  # @return [String] The base64 string representing self.data
-  def to_base64(self):
-    return self.data.decode('hex').encode('base64')
-
   # @return [BinNum] The binary string representing self.data
   def to_bin(self):
     return BinNum('{0:b}'.format(int(self.data, self.BASE)))

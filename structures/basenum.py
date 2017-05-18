@@ -35,16 +35,20 @@ class BaseNum:
       raise ValueError('Index out of bounds.')
     return self.__class__(self.data[:length])
 
-  # @param length [Integer] The final length of the string
-  # @return [BinNum] The same string but repeated to be of proper length
+  # @param length [Integer] The final length of the string.
+  # @return [BinNum] The same string but repeated to be of proper length.
   def repeat(self, length):
     if length <= len(self):
       raise ValueError('Repeat length is shorter than string length.')
     return self.pad(length, self.data)
 
-  # @param str_1 [BaseNum] The first string to make of equal length (padding 0)
-  # @param str_2 [BaseNum] The second string to make of equal length
-  # @return [BaseNum, BaseNum] The two strings, now of equal length
+  # @return [String] The data given as an integer in base 10.
+  def to_integer(self):
+    return int(self.data, self.__class__.BASE)
+
+  # @param str_1 [BaseNum] The first string to make of equal length (padding 0).
+  # @param str_2 [BaseNum] The second string to make of equal length.
+  # @return [BaseNum, BaseNum] The two strings, now of equal length.
   @staticmethod
   def normalize_length(str_1, str_2):
     if len(str_1) < len(str_2):
