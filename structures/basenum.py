@@ -1,3 +1,5 @@
+from math import log
+
 from utils.constants import Constants
 
 class BaseNum:
@@ -105,8 +107,8 @@ class BaseNum:
   def __mod__(self, other):
     return self.__operate(other, lambda x, y: x % y)
 
-  # @param byte [Integer] The byte to get from the BaseNum.
-  # @return [BaseNum] The byte that was asked for from self.data.
+  # @param byte [Integer] The byte to get.
+  # @return [BaseNum] The n-th byte of self.data.
   def get_byte(self, byte):
-    length = log(Constants.MAX_BYTE) / log(self.__class__.BASE)
+    length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
     return self.__class__(self.data[byte * length : (byte + 1) * length])

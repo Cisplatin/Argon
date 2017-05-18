@@ -1,5 +1,4 @@
 import structures.basenum
-import structures.hexnum
 
 class BinNum(structures.basenum.BaseNum):
   BASE = 2
@@ -18,7 +17,8 @@ class BinNum(structures.basenum.BaseNum):
 
   # @return [HexNum] The hexadecimal string representing self.data
   def to_hex(self):
-    return structures.hexnum.HexNum('{0:x}'.format(int(self.data, self.BASE)))
+    from structures.hexnum import HexNum
+    return HexNum('{0:x}'.format(int(self.data, self.BASE)))
 
   # @return [Bool] The parity of the string. False if even, True if odd.
   def parity(self):
