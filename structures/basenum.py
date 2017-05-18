@@ -1,3 +1,5 @@
+from utils.constants import Constants
+
 class BaseNum:
   # @param data [String] The number to represent
   def __init__(self, data):
@@ -102,3 +104,9 @@ class BaseNum:
   # @return [BaseNum] The modulos of the two BaseNums.
   def __mod__(self, other):
     return self.__operate(other, lambda x, y: x % y)
+
+  # @param byte [Integer] The byte to get from the BaseNum.
+  # @return [BaseNum] The byte that was asked for from self.data.
+  def get_byte(self, byte):
+    length = log(Constants.MAX_BYTE) / log(self.__class__.BASE)
+    return self.__class__(self.data[byte * length : (byte + 1) * length])
