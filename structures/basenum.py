@@ -55,3 +55,12 @@ class BaseNum:
         return str_1.pad(len(str_2)), str_2
     elif len(str_2) <= len(str_1):
         return str_1, str_2.pad(len(str_1))
+
+  # @param str_1 [BaseNum] The first number to compare
+  # @param str_2 [BaseNum] The second number to compare (of equal length)
+  # @return [Integer] The hamming distance
+  @staticmethod
+  def hamming_distance(str_1, str_2):
+    if len(str_1) != len(str_2):
+      raise ValueError('Strings must be equal length.')
+    return sum(char_1 != char_2 for char_1, char_2 in zip(str_1, str_2))
