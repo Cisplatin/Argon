@@ -65,9 +65,41 @@ class BaseNum:
       raise ValueError('Strings must be equal length.')
     return sum(char_1 != char_2 for char_1, char_2 in zip(str_1, str_2))
 
+  # @param other [BaseNum] The other BaseNum to operate on.
+  # @param func [Integer x Integer -> Integer] The function to operate with.
+  # @return [BaseNum] The result of the two BaseNum with the operator.
+  def __operate(self, other, func):
+    if self.__class__ != other.__class__:
+      raise ValueError('Cannot operate on two BaseNums of different types.')
+    result = func(self.to_integer(), other.to_integer())
+    return self.__class__.from_integer(result)
+
   # @param other [BaseNum] The other BaseNum added to.
   # @return [BaseNum] The sum of the two BaseNums.
   def __add__(self, other):
-    if self.__class__ != other.__class__:
-      raise ValueError('Cannot add two BaseNums of different types.')
-    return self.__class__.from_integer(self.to_integer() + other.to_integer())
+    return self.__operate(other, lambda x, y: x + y)
+
+  # @param other [BaseNum] The other BaseNum subtracted to.
+  # @return [BaseNum] The difference of the two BaseNums.
+  def __sub__(self, other):
+    return self.__operate(other, lambda x, y: x - y)
+
+  # @param other [BaseNum] The other BaseNum multiplied to.
+  # @return [BaseNum] The product of the two BaseNums.
+  def __mul__(self, other):
+    return self.__operate(other, lambda x, y: x * y)
+
+  # @param other [BaseNum] The other BaseNum divided to.
+  # @return [BaseNum] The quotient of the two BaseNums.
+  def __div__(self, other):
+    return self.__operate(other, lambda x, y: x / y)
+
+  # @param other [BaseNum] The other BaseNum floor-divided to.
+  # @Return [BaseNum] The floored quotient of the two BaseNums.
+  def __floordiv__(self, other):
+    return self.__operate(other, lambda x, y: x // y)
+
+  # @param other [BaseNum] The other BaseNum modulos'd to.
+  # @return [BaseNum] The modulos of the two BaseNums.
+  def __mod__(self, other):
+    return self.__operate(other, lambda x, y: x % y)

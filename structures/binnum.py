@@ -8,6 +8,8 @@ class BinNum(structures.basenum.BaseNum):
   # @return [BinNum] The given integer converted into a BinNum.
   @staticmethod
   def from_integer(integer):
+    if type(integer) != type(0) or integer < 0:
+      raise ValueError('Cannot convert non-positive integer value to BinNum.')
     return BinNum("{0:b}".format(integer))
 
   # @return [List<Boolean>] The bits associated with self.data
