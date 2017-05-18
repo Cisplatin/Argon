@@ -1,5 +1,4 @@
 class BaseNum:
-
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data

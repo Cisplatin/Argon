@@ -1,7 +1,5 @@
 import structures.basenum
-import structures.binnum
-
-BinNum = structures.binnum.BinNum
+from structures.binnum import BinNum
 
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
