@@ -6,6 +6,11 @@ BinNum = structures.binnum.BinNum
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
 
+  # @param integer [Integer] The integer to convert.
+  # @return [HexNum] The given integer converted into a HexNum.
+  def from_integer(integer):
+    return HexNum("{0:x}".format(integer))
+
   # @return [String] The ASCII string representing self.data
   def to_ASCII(self):
     return self.data.decode('hex')

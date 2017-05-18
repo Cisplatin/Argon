@@ -4,6 +4,12 @@ import structures.hexnum
 class BinNum(structures.basenum.BaseNum):
   BASE = 2
 
+  # @param integer [Integer] The integer to convert.
+  # @return [BinNum] The given integer converted into a BinNum.
+  @staticmethod
+  def from_integer(integer):
+    return BinNum("{0:b}".format(integer))
+
   # @return [List<Boolean>] The bits associated with self.data
   def bits(self):
     return map(int, list(self.data))
