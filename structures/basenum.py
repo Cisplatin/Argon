@@ -117,3 +117,10 @@ class BaseNum:
   def bytes(self):
     length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
     return len(self.data) / length
+
+  # @param other [BaseNum] The BaseNum to append.
+  # @return [BaseNum] The result of the current BaseNum preppended to the given.
+  def append(self, other):
+    if self.__class__ != other.__class__:
+      raise ValueError('Cannot append two BaseNums of different types.')
+    return self.__class__(self.data + other.data)
