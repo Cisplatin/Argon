@@ -112,3 +112,8 @@ class BaseNum:
   def get_byte(self, byte):
     length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
     return self.__class__(self.data[byte * length : (byte + 1) * length])
+
+  # @return [Integer] The number of bytes in the given BaseNum.
+  def bytes(self):
+    length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
+    return len(self.data) / length
