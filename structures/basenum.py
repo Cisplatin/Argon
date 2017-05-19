@@ -118,6 +118,14 @@ class BaseNum:
     length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
     return len(self.data) / length
 
+  # @return [Integer] The number of bits in the given BaseNum.
+  def bits(self):
+    # TODO: Write this more elegantly.
+    if self.__class__.BASE == 16:
+      return len(self.data) * 4
+    if self.__class__.BASE == 2:
+      return len(self.data)
+
   # @param other [BaseNum] The BaseNum to append.
   # @return [BaseNum] The result of the current BaseNum preppended to the given.
   def append(self, other):

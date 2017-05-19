@@ -16,7 +16,16 @@ def __key_scheduling(seed):
 # @param bits [Integer] The number of bits to return.
 # @return [BaseNum] The first n-bits of RC4's output for the given seed.
 def RC4(seed, bits):
-  # TODO: Finish this.
+  key = __key_scheduling(seed)
+  result = seed.__class__('')
+
+  i = j = 0
+  while result.bits() < bits:
+    i = (i + 1) % Constants.MAX_BYTE
+    j = (j + S[i]) % Constants.MAX_BYTE
+    S[i], S[j] = S[j], S[i]
+    byte = seed.__class__.from_integer(S[(S[i] + S[j]) % Constants.MAX_BYTE])
+    # TODO
   pass
 
 # @param seed [BaseNum] The seed to use RC4A's PRNG with.
