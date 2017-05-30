@@ -28,14 +28,3 @@ def RC4(seed, bits):
     byte = seed.__class__.from_integer(value)
     result = result.append(byte.pad(byte.byte_length()))
   return result
-
-# @param seed [BaseNum] The seed to use RC4A's PRNG with.
-# @param bits [Integer] The number of bits to return.
-# @return [BaseNum] The first n-bits of RC4A's output for the given seed.
-def RC4A(seed, bits):
-  key = __key_scheduling(seed)
-  result = seed.__class__('')
-
-  i = j = 0
-  # TODO: Finish this
-  return
