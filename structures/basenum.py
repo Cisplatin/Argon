@@ -24,8 +24,6 @@ class BaseNum:
   # @param pad [String] The pad to use. Default is '0'.
   # @return [BaseNum] The number of pads to prepend.
   def pad(self, length, pad='0'):
-    if length <= len(self):
-      return self
     if len(pad) == 0:
       raise ValueError('Cannot have a zero-length pad.')
     padded = self.__class__(((length - len(self) / len(pad))) * pad + self.data)

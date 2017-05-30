@@ -24,9 +24,9 @@ def RC4(seed, bits):
     i = (i + 1) % Constants.MAX_BYTE
     j = (j + key[i]) % Constants.MAX_BYTE
     key[i], key[j] = key[j], key[i]
-    byte = seed.__class__.from_integer(key[(key[i] + key[j]) % Constants.MAX_BYTE])
-    byte = byte.pad(byte.byte_length())
-    result = result.append(byte)
+    value = key[(key[i] + key[j]) % Constants.MAX_BYTE]
+    byte = seed.__class__.from_integer(value)
+    result = result.append(byte.pad(byte.byte_length()))
   return result
 
 # @param seed [BaseNum] The seed to use RC4A's PRNG with.
