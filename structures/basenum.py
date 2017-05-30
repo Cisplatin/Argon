@@ -118,7 +118,6 @@ class BaseNum:
     return len(self.data) / self.byte_length()
 
   # @return [Integer] The number of digits in one byte for the type of BaseNum.
-  # TODO: Make this a static function
   def byte_length(self):
     return int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
 
