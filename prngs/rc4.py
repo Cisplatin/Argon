@@ -33,5 +33,9 @@ def RC4(seed, bits):
 # @param bits [Integer] The number of bits to return.
 # @return [BaseNum] The first n-bits of RC4A's output for the given seed.
 def RC4A(seed, bits):
-  # TODO: Finish this.
-  pass
+  key = __key_scheduling(seed)
+  result = seed.__class__('')
+
+  i = j = 0
+  # TODO: Finish this
+  return

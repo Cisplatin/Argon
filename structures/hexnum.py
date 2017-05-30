@@ -21,6 +21,10 @@ class HexNum(structures.basenum.BaseNum):
   def from_ASCII(string):
     return HexNum(string.encode('hex'))
 
+  # @return [List<Boolean>] The bits associated with self.data
+  def bits(self):
+    return self.to_bin().bits()
+
   # @return [BinNum] The binary string representing self.data
   def to_bin(self):
     from structures.binnum import BinNum
