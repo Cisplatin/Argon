@@ -25,7 +25,7 @@ class BaseNum:
   # @return [BaseNum] The number of pads to prepend.
   def pad(self, length, pad='0'):
     if length <= len(self):
-      raise ValueError('Padding length is shorter than string length.')
+      return self
     if len(pad) == 0:
       raise ValueError('Cannot have a zero-length pad.')
     padded = self.__class__(((length - len(self) / len(pad))) * pad + self.data)
@@ -34,7 +34,7 @@ class BaseNum:
   # @param length [Integer] The maximal length to trim at.
   # @return [BaseNum] The trimmed string.
   def trim(self, length):
-    if length >= len(self):
+    if length > len(self):
       raise ValueError('Index out of bounds.')
     return self.__class__(self.data[:length])
 
@@ -110,21 +110,17 @@ class BaseNum:
   # @param byte [Integer] The byte to get.
   # @return [BaseNum] The n-th byte of self.data.
   def get_byte(self, byte):
-    length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
+    length = self.byte_length()
     return self.__class__(self.data[byte * length : (byte + 1) * length])
 
   # @return [Integer] The number of bytes in the given BaseNum.
   def bytes(self):
-    length = int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
-    return len(self.data) / length
+    return len(self.data) / self.byte_length()
 
-  # @return [Integer] The number of bits in the given BaseNum.
-  def bits(self):
-    # TODO: Write this more elegantly.
-    if self.__class__.BASE == 16:
-      return len(self.data) * 4
-    if self.__class__.BASE == 2:
-      return len(self.data)
+  # @return [Integer] The number of digits in one byte for the type of BaseNum.
+  # TODO: Make this a static function
+  def byte_length(self):
+    return int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
 
   # @param other [BaseNum] The BaseNum to append.
   # @return [BaseNum] The result of the current BaseNum preppended to the given.
