@@ -1,30 +1,33 @@
 from structures.basenum import BaseNum
+from prngs.prng import PRNG
 from utils.constants import Constants
 
-# @param seed [BaseNum] The seed to use for the key-scheduing.
-# @return [Array<Integer>] The result of the RC4 key-scheduling algorithm
-def __key_scheduling(seed):
-  key = range(Constants.MAX_BYTE)
-  shuffle = 0
-  for index in xrange(Constants.MAX_BYTE):
-    byte = seed.get_byte(index % seed.bytes()).to_integer()
-    shuffle = (shuffle + key[index] + byte) % Constants.MAX_BYTE
-    key[index], key[shuffle] = key[shuffle], key[index]
-  return key
+class RC4(PRNG):
+  def __init__(self, seed):
+    super(RC4, self).__init__(seed)
+    self.key = self._RC4__key_scheduling()
+    self.i = self.j = 0
 
-# @param seed [BaseNum] The seed to use RC4's PRNG with.
-# @param bits [Integer] The number of bits to return.
-# @return [BaseNum] The first n-bits of RC4's output for the given seed.
-def RC4(seed, bits):
-  key = __key_scheduling(seed)
-  result = seed.__class__('')
+  # @return [Array<Integer>] The result of the RC4 key-scheduling algorithm
+  def __key_scheduling(self):
+    key = range(Constants.MAX_BYTE)
+    shuffle = 0
+    for index in xrange(Constants.MAX_BYTE):
+      byte = self.seed.get_byte(index % self.seed.bytes()).to_integer()
+      shuffle = (shuffle + key[index] + byte) % Constants.MAX_BYTE
+      key[index], key[shuffle] = key[shuffle], key[index]
+    return key
 
-  i = j = 0
-  while len(result.bits()) < bits:
-    i = (i + 1) % Constants.MAX_BYTE
-    j = (j + key[i]) % Constants.MAX_BYTE
-    key[i], key[j] = key[j], key[i]
-    value = key[(key[i] + key[j]) % Constants.MAX_BYTE]
-    byte = seed.__class__.from_integer(value)
-    result = result.append(byte.pad(byte.byte_length()))
-  return result
+  # @param bits [Integer] The number of bits to return.
+  # @return [BaseNum] The next n-bits of RC4's output for the given seed.
+  def generate_output(self, bits):
+    result = self.seed.__class__('')
+    while len(result.bits()) < bits:
+      self.i = (self.i + 1) % Constants.MAX_BYTE
+      self.j = (self.j + self.key[self.i]) % Constants.MAX_BYTE
+      self.key[self.i], self.key[self.j] = self.key[self.j], self.key[self.i]
+      index = (self.key[self.i] + self.key[self.j]) % Constants.MAX_BYTE
+      byte = self.seed.__class__.from_integer(self.key[index])
+      result = result.append(byte.pad(byte.byte_length()))
+    self.bits += bits
+    return result
