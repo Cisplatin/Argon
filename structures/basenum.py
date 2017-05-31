@@ -2,7 +2,7 @@ from math import log
 
 from utils.constants import Constants
 
-class BaseNum:
+class BaseNum(object):
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data
