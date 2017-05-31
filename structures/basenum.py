@@ -109,11 +109,15 @@ class BaseNum(object):
   # @return [BaseNum] The n-th byte of self.data.
   def get_byte(self, byte):
     length = self.byte_length()
-    if byte >= self.bytes():
+    num_bytes = self.bytes()
+    if len(self) % length:
+      length += 1
+      num_bytes += 1
+    if byte >= num_bytes:
       raise ValueError('Index out of bounds.')
     return self.__class__(self.data[byte * length : (byte + 1) * length])
 
-  # @return [Integer] The number of bytes in the given BaseNum.
+  # @return [Integer] The number of full bytes in the given BaseNum.
   def bytes(self):
     return len(self.data) / self.byte_length()
 

@@ -13,7 +13,7 @@ class RC4(PRNG):
     key = range(Constants.MAX_BYTE)
     shuffle = 0
     for index in xrange(Constants.MAX_BYTE):
-      byte = self.seed.get_byte(index % self.seed.bytes()).to_integer()
+      byte = self.seed.get_byte(index % max(1, self.seed.bytes())).to_integer()
       shuffle = (shuffle + key[index] + byte) % Constants.MAX_BYTE
       key[index], key[shuffle] = key[shuffle], key[index]
     return key
