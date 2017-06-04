@@ -22,6 +22,6 @@ class StreamCipher(Cipher):
   def build_from_prng(prng, key):
     from ciphers.rc4 import RC4
     for klass in StreamCipher.__subclasses__():
-      if klass.__name__ == prng.__name__:
+      if klass.PRNG.__name__ == prng.__name__:
         return klass(key)
     raise ValueError('Unknown PRNG given.')
