@@ -5,8 +5,7 @@ from utils.constants import Constants
 class RC4(PRNG):
   def __init__(self, seed):
     super(RC4, self).__init__(seed)
-    self.key = self._RC4__key_scheduling()
-    self.i = self.j = 0
+    self.reset()
 
   # @return [Array<Integer>] The result of the RC4 key-scheduling algorithm
   def __key_scheduling(self):
