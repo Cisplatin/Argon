@@ -3,6 +3,7 @@ from ciphers.cipher import Cipher
 class StreamCipher(Cipher):
   def __init__(self, key):
     super(StreamCipher, self).__init__(key)
+    self.prng = self.__class__.PRNG(key)
 
   # @param text [BaseNum] The plaintext to encrypt.
   # @return [BaseNum] The encrypted ciphertext.
