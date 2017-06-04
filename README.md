@@ -16,3 +16,16 @@ prng = RC4(seed)
 
 print prng.generate_output(bits)
 ```
+
+Running the RC4 cipher to encrypt `1001` using the key `1010`:
+
+```
+from structures.binnum import BinNum
+from ciphers.rc4 import RC4
+
+key = BinNum('1010')
+text = BinNum('1001')
+cipher = RC4(key)
+
+print cipher.encrypt(text)
+```
