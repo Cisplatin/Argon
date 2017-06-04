@@ -26,3 +26,7 @@ class StreamCipher(Cipher):
       if klass.PRNG.__name__ == prng.__name__:
         return klass(key)
     raise ValueError('Unknown PRNG given.')
+
+  # @note Resets the PRNG to start generating outputs from the beginning.
+  def reset(self):
+    self.prng.reset()

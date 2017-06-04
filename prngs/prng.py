@@ -3,7 +3,11 @@ class PRNG(object):
     self.seed = seed
     self.bits = 0
 
-  # @param bits [Integer] The number of bits to output
-  # @return [BaseNum] The result of the PRNG with the set seed
+  # @param bits [Integer] The number of bits to output.
+  # @return [BaseNum] The result of the PRNG with the set seed.
   def generate_output(self, bits):
     raise NotImplementedError("Must over-ride generate_output in sub-class.")
+
+  # @note Resets the PRNG to start generating outputs from the beginning.
+  def reset(self):
+    raise NotImplementedError("Must over-ride reset in sub-class.")

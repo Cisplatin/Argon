@@ -18,6 +18,11 @@ class RC4(PRNG):
       key[index], key[shuffle] = key[shuffle], key[index]
     return key
 
+  # @note Resets the PRNG to start generating outputs from the beginning.
+  def reset(self):
+    self.key = self._RC4__key_scheduling()
+    self.i = self.j = 0
+
   # @param bits [Integer] The number of bits to return.
   # @return [BaseNum] The next n-bits of RC4's output for the given seed.
   def generate_output(self, bits):
