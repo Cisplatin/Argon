@@ -1,13 +1,15 @@
-class Cipher(object):
+from ciphers.cipher import Cipher
+
+class StreamCipher(Cipher):
   def __init__(self, key):
-    self.key = key
+    super(StreamCipher, self).__init__(key)
 
   # @param text [BaseNum] The plaintext to encrypt
   # @return [BaseNum] The encrypted ciphertext
   def encrypt(self, text):
-    raise NotImplementedError("Must over-ride encrypt in sub-class.")
+    return text ^ self.prng.generate_output(len(text))
 
   # @param text [BaseNum] The ciphertext to decrypt
   # @return [BaseNum] The plaintext decrypted
   def decrypt(self, text):
-    raise NotImplementedError("Must over-ride decrypt in sub-class.")
+    return text ^ self.prng.generate_output(len(text))
