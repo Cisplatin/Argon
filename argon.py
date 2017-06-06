@@ -6,7 +6,7 @@ from ciphers.otp import OTP
 
 key = BinNum('1001001')
 a = RC4(key)
-print a.generate_output(10)
+print a.generate(10)
 cipher = StreamCipher.build_from_prng(Idempotent, key)
 print cipher.encrypt(BinNum(key.data[0]))
 print cipher.encrypt(BinNum(key.data[2:4]))

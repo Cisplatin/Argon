@@ -25,5 +25,4 @@ class RC4(PRNG):
       index = (self.key[self.i] + self.key[self.j]) % Constants.MAX_BYTE
       byte = self.seed.__class__.from_integer(self.key[index])
       result = result.append(byte.pad(byte.byte_length()))
-    super(RC4, self).generate_output(bits)
     return result

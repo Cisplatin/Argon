@@ -8,12 +8,12 @@ class StreamCipher(Cipher):
   # @param text [BaseNum] The plaintext to encrypt.
   # @return [BaseNum] The encrypted ciphertext.
   def encrypt(self, text):
-    return text ^ self.prng.generate_output(len(text))
+    return text ^ self.prng.generate(len(text))
 
   # @param text [BaseNum] The ciphertext to decrypt.
   # @return [BaseNum] The plaintext decrypted.
   def decrypt(self, text):
-    return text ^ self.prng.generate_output(len(text))
+    return text ^ self.prng.generate(len(text))
 
   # @param prng [PRNG] The PRNG to use for the cipher.
   # @param key [BaseNum] The key to use for the cipher.
