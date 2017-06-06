@@ -3,23 +3,15 @@ from prngs.prng import PRNG
 from utils.constants import Constants
 
 class RC4(PRNG):
-  def __init__(self, seed):
-    super(RC4, self).__init__(seed)
-    self.reset()
-
-  # @return [Array<Integer>] The result of the RC4 key-scheduling algorithm
-  def __key_scheduling(self):
+  # @note Runs the RC4 key-scheduling algorithm
+  def prepare_generator(self):
     key = range(Constants.MAX_BYTE)
     shuffle = 0
     for index in xrange(Constants.MAX_BYTE):
       byte = self.seed.get_byte(index % max(1, self.seed.bytes())).to_integer()
       shuffle = (shuffle + key[index] + byte) % Constants.MAX_BYTE
       key[index], key[shuffle] = key[shuffle], key[index]
-    return key
-
-  # @note Resets the PRNG to start generating outputs from the beginning.
-  def reset(self):
-    self.key = self._RC4__key_scheduling()
+    self.key = key
     self.i = self.j = 0
 
   # @param bits [Integer] The number of bits to return.
