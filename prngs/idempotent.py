@@ -10,5 +10,5 @@ class Idempotent(PRNG):
     if self.bits + bits > len(self.seed.data):
       raise ValueError('Not enough of the seed left to output.')
     result = self.seed.__class__(self.seed.data[self.bits:self.bits + bits])
-    self.bits += bits
+    super(Idempotent, self).generate_output(bits)
     return result
