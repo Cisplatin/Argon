@@ -1,8 +1,11 @@
+from abc import ABCMeta, abstractmethod
 from math import log
 
 from utils.constants import Constants
 
 class BaseNum(object):
+  __metaclass__ = ABCMeta
+
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data
