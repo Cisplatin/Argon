@@ -22,6 +22,7 @@ class StreamCipher(Cipher):
   @staticmethod
   def build_from_prng(prng, key):
     from ciphers.rc4 import RC4
+    from ciphers.otp import OTP
     for klass in StreamCipher.__subclasses__():
       if klass.PRNG.__name__ == prng.__name__:
         return klass(key)
