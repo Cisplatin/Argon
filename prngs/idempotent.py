@@ -15,7 +15,6 @@ class Idempotent(PRNG):
   # @return [BaseNum] The next n-bits of the given seed.
   # @raise [ValueError] If there are not enough bits left.
   def generate_output(self, bits):
-    # TODO Cleaner .data call
     if self.bits + bits >= len(self.seed.data):
       raise ValueError('Not enough of the key left to encrypt.')
     result = self.seed.__class__(self.seed.data[self.bits:self.bits + bits])
