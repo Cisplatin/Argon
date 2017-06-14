@@ -163,12 +163,31 @@ class BaseNum(object):
   def __mod__(self, other):
     return self.__operate(other, lambda x, y: x % y)
 
+  # @param other [BaseNum] The string to XOR with
+  # @return [BaseNum] The result of str_1 ^ str_2
+  def __xor__(self, other):
+    return (self.to_bin() ^ other.to_bin()).__to_basenum(self.__class__)
+
+  # @param other [BaseNum] The string to AND with
+  # @return [BaseNum] The result of str_1 & str_2
+  def __and__(self, other):
+    return (str_1.to_bin() & str_2.to_bin()).__to_basenum(self.__class__)
+
+  # @param other [BaseNum] The string to OR with
+  # @return [BaseNum] The result of str_1 | str_2
+  def __or__(self, other):
+    return (str_1.to_bin() | str_2.to_bin()).__to_basenum(self.__class__)
+
+  # @return [List<Boolean>] The bits associated with self.data
+  def bits(self):
+    return self.to_bin().bits()
+
   # @param byte [Integer] The byte to get.
   # @return [BaseNum] The n-th byte of self.data.
   # @raise [IndexError] If the byte is out-of-bounds.
   def get_byte(self, byte):
     length = self.length_of_byte()
-    num_bytes = self.bytes()
+    num_bytes = self.num_bytes()
 
     # If there is an incomplete byte at the end of the data.
     if len(self) % length:
@@ -180,7 +199,7 @@ class BaseNum(object):
     return self.__class__(self.data[byte * length : (byte + 1) * length])
 
   # @return [Integer] The number of full bytes in the given BaseNum.
-  def bytes(self):
+  def num_bytes(self):
     return len(self.data) / self.length_of_byte()
 
   # @return [Integer] The number of digits in one byte for the type of BaseNum.
