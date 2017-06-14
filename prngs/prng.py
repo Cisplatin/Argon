@@ -6,22 +6,22 @@ class PRNG(object):
   def __init__(self, seed):
     self.seed = seed
     self.bits = 0
-    self.prepare_generator()
+    self._prepare_generator()
 
   # @note Placeholder in case a sub-class does not require preparation.
-  def prepare_generator(self):
+  def _prepare_generator(self):
     pass
 
   # @param bits [Integer] The number of bits to output.
   # @return [BaseNum] The next n-bits of the prng's output for the given seed.
   @abstractmethod
-  def generate_output(self, bits):
+  def _generate_output(self, bits):
     pass
 
   # @param bits [Integer] The number of bits to output.
   # @return [BaseNum] The next n-bits of the prng's output for the given seed.
   def generate(self, bits):
-    result = self.generate_output(bits)
+    result = self._generate_output(bits)
     self.bits += bits
     return result
 

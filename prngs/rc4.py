@@ -4,7 +4,7 @@ from utils.constants import Constants
 
 class RC4(PRNG):
   # @note Runs the RC4 key-scheduling algorithm
-  def prepare_generator(self):
+  def _prepare_generator(self):
     key = range(Constants.MAX_BYTE)
     shuffle = 0
     for index in xrange(Constants.MAX_BYTE):
@@ -16,7 +16,7 @@ class RC4(PRNG):
 
   # @param bits [Integer] The number of bits to return.
   # @return [BaseNum] The next n-bits of RC4's output for the given seed.
-  def generate_output(self, bits):
+  def _generate_output(self, bits):
     result = self.seed.__class__('')
     while len(result.bits()) < bits:
       self.i = (self.i + 1) % Constants.MAX_BYTE
