@@ -2,17 +2,8 @@ import structures.basenum
 
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
-  FORMAT = "{0:x}"
-
-  # @return [String] The ASCII string representing self.data
-  def to_ASCII(self):
-    return self.data.decode('hex')
-
-  # @param string [String] The ASCII string to convert
-  # @return [HexNum] The HexNum equivalent of the given ASCII
-  @staticmethod
-  def from_ASCII(string):
-    return HexNum(string.encode('hex'))
+  FORMAT = '{0:x}'
+  ENCODING = 'hex'
 
   # @return [List<Boolean>] The bits associated with self.data
   def bits(self):

@@ -2,7 +2,8 @@ import structures.basenum
 
 class BinNum(structures.basenum.BaseNum):
   BASE = 2
-  FORMAT = "{0:b}"
+  FORMAT = '{0:b}'
+  ENCODING = 'bin'
 
   # @return [List<Boolean>] The bits associated with self.data
   def bits(self):

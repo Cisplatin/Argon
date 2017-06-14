@@ -14,6 +14,10 @@ class BaseNum(object):
   def FORMAT(self):
     pass
 
+  @abstractproperty
+  def ENCODING(self):
+    pass
+
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data
@@ -54,9 +58,18 @@ class BaseNum(object):
       raise ValueError('Repeat length is shorter than string length.')
     return self.pad(length, self.data)
 
-  # @return [String] The data given as an integer in base 10.
+  # @return [Integer] The data given as an integer in base 10.
   def to_integer(self):
     return int(self.data, self.__class__.BASE)
+
+  # @return [String] The data given as ASCII.
+  def to_ASCII(self):
+    return self.data.decode(self.__class__.ENCODING)
+
+  # @return [BaseNum] The given string converted to a BaseNum.
+  @classmethod
+  def from_ASCII(cls, string):
+    return cls(string.encode(cls.ENCODING))
 
   # @param str_1 [BaseNum] The first string to make of equal length (padding 0).
   # @param str_2 [BaseNum] The second string to make of equal length.
