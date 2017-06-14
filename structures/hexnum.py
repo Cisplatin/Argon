@@ -2,7 +2,7 @@ import structures.basenum
 
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
-  FORMAT = '{0:x}'
+  FORMAT = '{0:X}'
   ENCODING = 'hex'
 
   # @return [List<Boolean>] The bits associated with self.data

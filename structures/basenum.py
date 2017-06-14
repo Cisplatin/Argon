@@ -169,9 +169,12 @@ class BaseNum(object):
   def get_byte(self, byte):
     length = self.length_of_byte()
     num_bytes = self.bytes()
+
+    # If there is an incomplete byte at the end of the data.
     if len(self) % length:
       length += 1
       num_bytes += 1
+
     if byte >= num_bytes:
       raise IndexError('Index out of bounds.')
     return self.__class__(self.data[byte * length : (byte + 1) * length])
