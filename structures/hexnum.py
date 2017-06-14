@@ -1,6 +1,6 @@
-import structures.basenum
+from structures.basenum import BaseNum
 
-class HexNum(structures.basenum.BaseNum):
+class HexNum(BaseNum):
   BASE = 16
   FORMAT = '{0:X}'
   ENCODING = 'hex'

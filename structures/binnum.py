@@ -1,6 +1,6 @@
-import structures.basenum
+from structures.basenum import BaseNum
 
-class BinNum(structures.basenum.BaseNum):
+class BinNum(BaseNum):
   BASE = 2
   FORMAT = '{0:b}'
   ENCODING = 'bin'
