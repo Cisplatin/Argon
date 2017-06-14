@@ -9,17 +9,7 @@ class BinNum(structures.basenum.BaseNum):
   def bits(self):
     return map(int, list(self.data))
 
-  # @return [HexNum] The hexadecimal string representing self.data.
-  def to_hex(self):
-    from structures.hexnum import HexNum
-    return HexNum(HexNum.FORMAT.format(int(self.data, self.__class__.BASE)))
-
-  # @return [OctNum] The octal string representing self.data.
-  def to_oct(self):
-    from structures.octnum import OctNum
-    return OctNum(OctNum.FORMAT.format(int(self.data, self.__class__.BASE)))
-
-  # @return [Bool] The parity of the string. False if even, True if odd.
+ # @return [Bool] The parity of the string. False if even, True if odd.
   def parity(self):
     return reduce(lambda x, y: x ^ bool(y), self.data, False)
 

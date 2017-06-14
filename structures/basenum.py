@@ -186,3 +186,24 @@ class BaseNum(object):
   # @return [Integer] The number of digits in one byte for the type of BaseNum.
   def length_of_byte(self):
     return int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
+
+  # @return [BinNum] The binary string representing self.data.
+  def to_bin(self):
+    from structures.binnum import BinNum
+    if self.data == '':
+        return BinNum('')
+    return BinNum(BinNum.FORMAT.format(int(self.data, self.__class__.BASE)))
+
+  # @return [HexNum] The hexadecimal string representing self.data.
+  def to_hex(self):
+    from structures.hexnum import HexNum
+    if self.data == '':
+        return HexNum('')
+    return HexNum(HexNum.FORMAT.format(int(self.data, self.__class__.BASE)))
+
+  # @return [OctNum] The octal string representing self.data.
+  def to_oct(self):
+    from structures.octnum import OctNum
+    if self.data == '':
+        return OctNum('')
+    return OctNum(OctNum.FORMAT.format(int(self.data, self.__class__.BASE)))
