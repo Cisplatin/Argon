@@ -187,23 +187,24 @@ class BaseNum(object):
   def length_of_byte(self):
     return int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
 
+  # @param klass [Class] The class to convert to.
+  # @return [BaseNum] The requested BaseNum with the current data.
+  def __to_basenum(self, klass):
+    if self.data == '':
+      return klass('')
+    return klass(klass.FORMAT.format(int(self.data, self.__class__.BASE)))
+
   # @return [BinNum] The binary string representing self.data.
   def to_bin(self):
     from structures.binnum import BinNum
-    if self.data == '':
-        return BinNum('')
-    return BinNum(BinNum.FORMAT.format(int(self.data, self.__class__.BASE)))
+    return self.__to_basenum(BinNum)
 
   # @return [HexNum] The hexadecimal string representing self.data.
   def to_hex(self):
     from structures.hexnum import HexNum
-    if self.data == '':
-        return HexNum('')
-    return HexNum(HexNum.FORMAT.format(int(self.data, self.__class__.BASE)))
+    return self.__to_basenum(HexNum)
 
   # @return [OctNum] The octal string representing self.data.
   def to_oct(self):
     from structures.octnum import OctNum
-    if self.data == '':
-        return OctNum('')
-    return OctNum(OctNum.FORMAT.format(int(self.data, self.__class__.BASE)))
+    return self.__to_basenum(OctNum)
