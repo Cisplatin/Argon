@@ -167,7 +167,7 @@ class BaseNum(object):
   # @return [BaseNum] The n-th byte of self.data.
   # @raise [IndexError] If the byte is out-of-bounds.
   def get_byte(self, byte):
-    length = self.byte_length()
+    length = self.length_of_byte()
     num_bytes = self.bytes()
     if len(self) % length:
       length += 1
@@ -178,8 +178,8 @@ class BaseNum(object):
 
   # @return [Integer] The number of full bytes in the given BaseNum.
   def bytes(self):
-    return len(self.data) / self.byte_length()
+    return len(self.data) / self.length_of_byte()
 
   # @return [Integer] The number of digits in one byte for the type of BaseNum.
-  def byte_length(self):
+  def length_of_byte(self):
     return int(log(Constants.MAX_BYTE, 2) / log(self.__class__.BASE, 2))
