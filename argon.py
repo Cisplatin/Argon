@@ -1,4 +1,5 @@
 from structures.binnum import BinNum
+from structures.hexnum import HexNum
 from prngs.rc4 import RC4
 from prngs.idempotent import Idempotent
 from ciphers.streamcipher import StreamCipher

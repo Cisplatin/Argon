@@ -10,6 +10,10 @@ class BaseNum(object):
   def BASE(self):
     pass
 
+  @abstractproperty
+  def FORMAT(self):
+    pass
+
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data
@@ -138,3 +142,11 @@ class BaseNum(object):
     if self.__class__ != other.__class__:
       raise ValueError('Cannot append two BaseNums of different types.')
     return self.__class__(self.data + other.data)
+
+  # @param integer [Integer] The integer to convert.
+  # @return [BaseNum] The given integer converted into BaseNum.
+  @classmethod
+  def from_integer(cls, integer):
+    if type(integer) != type(0) or integer < 0:
+      raise ValueError('Cannot convert non-positive integer value to BaseNum.')
+    return cls(cls.FORMAT.format(integer))

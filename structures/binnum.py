@@ -2,14 +2,7 @@ import structures.basenum
 
 class BinNum(structures.basenum.BaseNum):
   BASE = 2
-
-  # @param integer [Integer] The integer to convert.
-  # @return [BinNum] The given integer converted into a BinNum.
-  @staticmethod
-  def from_integer(integer):
-    if type(integer) != type(0) or integer < 0:
-      raise ValueError('Cannot convert non-positive integer value to BinNum.')
-    return BinNum("{0:b}".format(integer))
+  FORMAT = "{0:b}"
 
   # @return [List<Boolean>] The bits associated with self.data
   def bits(self):

@@ -2,14 +2,7 @@ import structures.basenum
 
 class HexNum(structures.basenum.BaseNum):
   BASE = 16
-
-  # @param integer [Integer] The integer to convert.
-  # @return [HexNum] The given integer converted into a HexNum.
-  @staticmethod
-  def from_integer(integer):
-    if type(integer) != type(0) or integer < 0:
-      raise ValueError('Cannot convert non-positive integer value to HexNum.')
-    return HexNum("{0:x}".format(integer))
+  FORMAT = "{0:x}"
 
   # @return [String] The ASCII string representing self.data
   def to_ASCII(self):
