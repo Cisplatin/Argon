@@ -190,6 +190,8 @@ class BaseNum(object):
   # @param klass [Class] The class to convert to.
   # @return [BaseNum] The requested BaseNum with the current data.
   def __to_basenum(self, klass):
+    if self.__class__ == klass:
+      return self
     if self.data == '':
       return klass('')
     return klass(klass.FORMAT.format(int(self.data, self.__class__.BASE)))
