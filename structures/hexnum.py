@@ -21,7 +21,9 @@ class HexNum(structures.basenum.BaseNum):
   # @return [BinNum] The binary string representing self.data
   def to_bin(self):
     from structures.binnum import BinNum
-    return BinNum('{0:b}'.format(int(self.data, self.BASE)))
+    if self.data == '':
+        return BinNum('')
+    return BinNum(BinNum.FORMAT.format(int(self.data, self.BASE)))
 
   # @param other [HexNum] The string to XOR with
   # @return [HexNum] The result of str_1 ^ str_2
