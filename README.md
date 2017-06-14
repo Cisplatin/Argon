@@ -29,3 +29,8 @@ cipher = RC4(key)
 
 print cipher.encrypt(text)
 ```
+
+## To-do
+
+- Regex verification on BaseNum creation
+- Allow string prefixes (i.e. 0x for HexNum)
