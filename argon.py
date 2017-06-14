@@ -1,5 +1,5 @@
 from structures.hexnum import HexNum
-from hashes.idempotent import Idempotent
+from prngs.idempotent import Idempotent
 
-text = HexNum('A1B')
-print Idempotent().hash(text)
+seed = HexNum('A1B')
+print Idempotent(seed).generate(2)

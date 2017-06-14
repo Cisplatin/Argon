@@ -1,6 +1,4 @@
-from structures.basenum import BaseNum
 from prngs.prng import PRNG
-from utils.constants import Constants
 
 class Idempotent(PRNG):
   # @param bits [Integer] The number of bits to return.
