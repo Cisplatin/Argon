@@ -1,9 +1,18 @@
+from re import match
+
 from structures.basenum import BaseNum
 
 class BinNum(BaseNum):
   BASE = 2
   FORMAT = '{0:b}'
   ENCODING = 'bin'
+
+  # @param data [String] The value to represent by the BinNum.
+  # @raise [ValueError] If the given value is not valid binary.
+  def __init__(self, data):
+    if not match(r'^[01]*$', data):
+      raise ValueError('Invalid data given for BinNum.')
+    super(BinNum, self).__init__(data)
 
   # @return [List<Boolean>] The bits associated with self.data.
   def bits(self):
