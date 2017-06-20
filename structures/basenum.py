@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod, abstractproperty
 from math import log
+from re import match
 
 from utils.constants import Constants
 
@@ -26,8 +27,11 @@ class BaseNum(object):
   def REGEX(self):
     pass
 
-  # @param data [String] The number to represent
+  # @param data [String] The number to represent.
+  # @raise [ValueError] If invalid data is given for the BaseNum.
   def __init__(self, data):
+    if not match(self.__class__.REGEX, data):
+      raise ValueError('Invalid data given for %s.' % self.__class__.__name__)
     self.data = data
 
   # @return [String] The data representation.

@@ -12,8 +12,6 @@ class HexNum(BaseNum):
   # @raise [ValueError] If the given value is not valid hexadecimal.
   def __init__(self, data):
     data = HexNum.clean_hex_string(data)
-    if not match(self.__class__.REGEX, data):
-      raise ValueError('Invalid data given for HexNum.')
     super(HexNum, self).__init__(data)
 
   # @param string [String] The string to remove 0x prefix from

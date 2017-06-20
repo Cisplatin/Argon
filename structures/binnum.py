@@ -8,13 +8,6 @@ class BinNum(BaseNum):
   ENCODING = 'bin'
   REGEX = r'^[01]*$'
 
-  # @param data [String] The value to represent by the BinNum.
-  # @raise [ValueError] If the given value is not valid binary.
-  def __init__(self, data):
-    if not match(self.__class__.REGEX, data):
-      raise ValueError('Invalid data given for BinNum.')
-    super(BinNum, self).__init__(data)
-
   # @return [List<Boolean>] The bits associated with self.data.
   def bits(self):
     return map(int, list(self.data))
