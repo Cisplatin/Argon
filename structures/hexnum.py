@@ -6,12 +6,13 @@ class HexNum(BaseNum):
   BASE = 16
   FORMAT = '{0:X}'
   ENCODING = 'hex'
+  REGEX = r'^[0-9a-fA-F]*$'
 
   # @param data [String] The value to represent by the HexNum.
   # @raise [ValueError] If the given value is not valid hexadecimal.
   def __init__(self, data):
     data = HexNum.clean_hex_string(data)
-    if not match(r'^[0-9a-fA-F]*$', data):
+    if not match(self.__class__.REGEX, data):
       raise ValueError('Invalid data given for HexNum.')
     super(HexNum, self).__init__(data)
 
