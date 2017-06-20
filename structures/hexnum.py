@@ -10,8 +10,15 @@ class HexNum(BaseNum):
   # @param data [String] The value to represent by the HexNum.
   # @raise [ValueError] If the given value is not valid hexadecimal.
   def __init__(self, data):
-    if data.startswith('0x'):
-      data = data[len('0x'):]
+    data = HexNum.clean_hex_string(data)
     if not match(r'^[0-9a-fA-F]*$', data):
       raise ValueError('Invalid data given for HexNum.')
     super(HexNum, self).__init__(data)
+
+  # @param string [String] The string to remove 0x prefix from
+  # @return [String] The string without the 0x prefix
+  @staticmethod
+  def clean_hex_string(string):
+    if string.startswith('0x'):
+      return string[len('0x'):]
+    return string
