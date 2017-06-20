@@ -21,6 +21,11 @@ class BaseNum(object):
   def ENCODING(self):
     pass
 
+  # @note This is the regular expression all data must fit.
+  @abstractproperty
+  def REGEX(self):
+    pass
+
   # @param data [String] The number to represent
   def __init__(self, data):
     self.data = data
