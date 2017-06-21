@@ -7,6 +7,10 @@ class Matrix(object):
     self.cols = cols
     self.matrix = [[value for i in xrange(self.cols)] for j in xrange(self.rows)]
 
+  # @return [String] The data representation.
+  def __repr__(self):
+    return '\n'.join(map(lambda x: ' '.join(map(str, x)), self.matrix))
+
   # @param row [Integer] The row index to set.
   # @param col [Integer] The column index to set.
   # @param value [BaseNum] The value to set the matrix to at the row/col.
@@ -23,6 +27,14 @@ class Matrix(object):
     if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
       raise ValueError('Index is out-of-bounds.')
     return self.matrix[row][col]
+
+  # @return [Matrix] The transposed matrix.
+  def transpose(self):
+    result = Matrix(self.cols, self.rows)
+    for row in xrange(self.rows):
+      for col in xrange(self.cols):
+        result.set(col, row, self.get(row, col))
+    return result
 
   # @param other [Matrix] The other Matrix to operate on.
   # @param func [BaseNum x BaseNum -> BaseNum] The function to operate with.
