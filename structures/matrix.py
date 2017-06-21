@@ -42,3 +42,9 @@ class Matrix(object):
   # @raise [ValueError] If the two matricies are different dimensions.
   def __add__(self, other):
     return self.__operate(other, lambda x, y: x + y)
+
+  # @param other [Matrix] The other Matrix subtracted to.
+  # @return [Matrix] The difference of the two Matrixs.
+  # @raise [ValueError] If the two Matrices are of different types.
+  def __sub__(self, other):
+    return self.__operate(other, lambda x, y: x - y)
