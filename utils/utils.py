@@ -11,11 +11,9 @@ def english_letter_frequency():
 def sentence_letter_frequency(string):
   english = english_letter_frequency()
   plaintext_freq = { letter : 0 for letter in english }
-
   for char in string:
     if char.upper() in plaintext_freq:
       plaintext_freq[char.upper()] += 1
-
   letters = sorted(plaintext_freq, key=plaintext_freq.get, reverse=True)
 
   # @param index [Integer] The frequency of a certain letter in plaintext
@@ -37,5 +35,4 @@ def sentence_letter_frequency(string):
           count -= 1
       else:
         count += 1
-
   return letters

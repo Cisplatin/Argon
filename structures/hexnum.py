@@ -14,8 +14,8 @@ class HexNum(BaseNum):
     data = HexNum.clean_hex_string(data)
     super(HexNum, self).__init__(data)
 
-  # @param string [String] The string to remove 0x prefix from
-  # @return [String] The string without the 0x prefix
+  # @param string [String] The string to remove 0x prefix from.
+  # @return [String] The string without the 0x prefix.
   @staticmethod
   def clean_hex_string(string):
     if string.startswith('0x'):
