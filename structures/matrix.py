@@ -48,3 +48,18 @@ class Matrix(object):
   # @raise [ValueError] If the two Matrices are of different types.
   def __sub__(self, other):
     return self.__operate(other, lambda x, y: x - y)
+
+  # @param other [Matrix] The matrix to indexwise XOR with.
+  # @return [Matrix] The result of matrix_1 ^ matrix_2.
+  def __xor__(self, other):
+    return self.__operate(other, lambda x, y: x ^ y)
+
+  # @param other [Matrix] The matrix to indexwise AND with.
+  # @return [Matrix] The result of matrix_1 & matrix_2.
+  def __and__(self, other):
+    return self.__operate(other, lambda x, y: x & y)
+
+  # @param other [Matrix] The matrix to indexwise OR with.
+  # @return [Matrix] The result of matrix_1 | matrix_2.
+  def __or__(self, other):
+    return self.__operate(other, lambda x, y: x | y)
