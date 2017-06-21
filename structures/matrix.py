@@ -5,7 +5,7 @@ class Matrix(object):
   def __init__(self, rows, cols, value=None):
     self.rows = rows
     self.cols = cols
-    self.matrix = [[value] * self.cols] * self.rows
+    self.matrix = [[value for i in xrange(self.cols)] for j in xrange(self.rows)]
 
   # @param row [Integer] The row index to set.
   # @param col [Integer] The column index to set.
@@ -13,7 +13,7 @@ class Matrix(object):
   # @raise [ValueError] If the index if out-of-bounds.
   def set(self, row, col, value):
     if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
-      raise ValueError('Index out-of-bounds.')
+      raise ValueError('Index is out-of-bounds.')
     self.matrix[row][col] = value
 
   # @param row [Integer] The row index to get.
@@ -21,7 +21,7 @@ class Matrix(object):
   # @raise [ValueError] If the index if out-of-bounds.
   def get(self, row, col):
     if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
-      raise ValueError('Index out-of-bounds.')
+      raise ValueError('Index is out-of-bounds.')
     return self.matrix[row][col]
 
   # @param other [Matrix] The other Matrix to operate on.
