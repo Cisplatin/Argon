@@ -78,5 +78,8 @@ class Matrix(object):
 
   # @param index [Integer] The index of the desired row.
   # @return [Array<BaseNum>] The desired row.
+  # @raise [IndexError] If the index is out-of-bounds.
   def __getitem__(self, index):
+    if index < 0 or index > self.rows:
+      raise IndexError('Index out-of-bounds.')
     return self.matrix[index]
