@@ -11,23 +11,6 @@ class Matrix(object):
   def __repr__(self):
     return '\n'.join(map(lambda x: ' '.join(map(str, x)), self.matrix))
 
-  # @param row [Integer] The row index to set.
-  # @param col [Integer] The column index to set.
-  # @param value [BaseNum] The value to set the matrix to at the row/col.
-  # @raise [ValueError] If the index if out-of-bounds.
-  def set(self, row, col, value):
-    if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
-      raise ValueError('Index is out-of-bounds.')
-    self.matrix[row][col] = value
-
-  # @param row [Integer] The row index to get.
-  # @param col [Integer] The column index to get.
-  # @raise [ValueError] If the index if out-of-bounds.
-  def get(self, row, col):
-    if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
-      raise ValueError('Index is out-of-bounds.')
-    return self.matrix[row][col]
-
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols, self.rows)
@@ -80,6 +63,15 @@ class Matrix(object):
   # @return [Array<BaseNum>] The desired row.
   # @raise [IndexError] If the index is out-of-bounds.
   def __getitem__(self, index):
-    if index < 0 or index > self.rows:
+    if index < 0 or index >= self.rows:
       raise IndexError('Index out-of-bounds.')
     return self.matrix[index]
+
+  # @param row [Integer] The index of the desired row to set.
+  # @param col [Integer] The index of the desired column to set.
+  # @param value [BaseNum] The value to set the index to.
+  # @raise [InexError] If the index is out-of-bounds.
+  def __setitem__(self, row, col, value):
+    if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
+      raise IndexError('Index out-of-bounds.')
+    self.matrix[row][col] = value
