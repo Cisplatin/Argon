@@ -16,7 +16,7 @@ class Matrix(object):
     result = Matrix(self.cols, self.rows)
     for row in xrange(self.rows):
       for col in xrange(self.cols):
-        result.set(col, row, self.get(row, col))
+        result[col][row] = self.matrix[row][col]
     return result
 
   # @param other [Matrix] The other Matrix to operate on.
@@ -29,7 +29,7 @@ class Matrix(object):
     result = Matrix(self.rows, self.cols)
     for row in xrange(self.rows):
       for col in xrange(self.cols):
-        result.set(row, col, func(self.get(row, col), other.get(row, col)))
+        result[row][col] = func(self[row][col], other[row][col])
     return result
 
   # @param other [Matrix] The other Matrix added to.
