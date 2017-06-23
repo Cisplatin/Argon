@@ -3,19 +3,25 @@ class Matrix(object):
   # @param cols [Integer] The number of columns required for the matrix.
   # @param value [BaseNum || None] The value to instantiate the matrix with.
   def __init__(self, rows, cols, value=None):
-    self.rows = rows
-    self.cols = cols
-    self.matrix = [[value for i in xrange(self.cols)] for j in xrange(self.rows)]
+    self.matrix = [[value for i in xrange(cols)] for j in xrange(rows)]
 
   # @return [String] The data representation.
   def __repr__(self):
     return '\n'.join(map(lambda x: ' '.join(map(str, x)), self.matrix))
 
+  # @return [Integer] The number of rows in the matrix.
+  def rows(self):
+    return len(self.matrix[0]) if self.matrix != [] else 0
+
+  # @return [Integer] The number of columns in the matrix.
+  def cols(self):
+    return len(self.matrix)
+
   # @return [Matrix] The transposed matrix.
   def transpose(self):
-    result = Matrix(self.cols, self.rows)
-    for row in xrange(self.rows):
-      for col in xrange(self.cols):
+    result = Matrix(self.cols(), self.rows())
+    for row in xrange(self.rows()):
+      for col in xrange(self.cols()):
         result[col][row] = self.matrix[row][col]
     return result
 
@@ -24,11 +30,11 @@ class Matrix(object):
   # @return [Matrix] The result of the two BaseNum with the operator.
   # @raise [ValueError] If the two matrices are different dimensions.
   def __operate(self, other, func):
-    if self.rows != other.rows or self.cols != other.cols:
+    if self.rows() != other.rows() or self.cols() != other.cols():
       raise ValueError('Cannot operate on matrices with different dimensions.')
-    result = Matrix(self.rows, self.cols)
-    for row in xrange(self.rows):
-      for col in xrange(self.cols):
+    result = Matrix(self.rows(), self.cols())
+    for row in xrange(self.rows()):
+      for col in xrange(self.cols()):
         result[row][col] = func(self[row][col], other[row][col])
     return result
 
@@ -63,7 +69,7 @@ class Matrix(object):
   # @return [Array<BaseNum>] The desired row.
   # @raise [IndexError] If the index is out-of-bounds.
   def __getitem__(self, index):
-    if index < 0 or index >= self.rows:
+    if index < 0 or index >= self.rows():
       raise IndexError('Index out-of-bounds.')
     return self.matrix[index]
 
@@ -72,6 +78,6 @@ class Matrix(object):
   # @param value [BaseNum] The value to set the index to.
   # @raise [InexError] If the index is out-of-bounds.
   def __setitem__(self, row, col, value):
-    if row < 0 or row >= self.rows or col < 0 or col >= self.cols:
+    if row < 0 or row >= self.rows() or col < 0 or col >= self.cols():
       raise IndexError('Index out-of-bounds.')
     self.matrix[row][col] = value
