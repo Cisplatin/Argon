@@ -75,3 +75,8 @@ class Matrix(object):
   # @return [Matrix] The result of matrix_1 | matrix_2.
   def __or__(self, other):
     return self.__operate(other, lambda x, y: x | y)
+
+  # @param index [Integer] The index of the desired row.
+  # @return [Array<BaseNum>] The desired row.
+  def __getitem__(self, index):
+    return self.matrix[index]
