@@ -64,7 +64,6 @@ class Matrix(object):
   def __sub__(self, other):
     return self.__operate(other, lambda x, y: x - y)
 
-  """
   # @param other [Matrix] The other Matrix to multiply by.
   # @return [Matrix] The product of the two matrices.
   # @raise [ValueError] If the two Matrices are of incorrect dimensions.
@@ -74,9 +73,15 @@ class Matrix(object):
     result = Matrix(self.rows(), other.cols())
     for row in xrange(self.rows()):
       for col in xrange(self.cols()):
-        # TODO
-        pass
-  """
+        multiply = (lambda x: reduce(lambda y, z: y * z, x))
+        result[row][col] = sum(map(multiply, zip(self.row(row), other.col(col))))
+    return result
+
+  # @param other [Matrix] The other Matrix subtracted to.
+  # @return [Matrix] The difference of the two matrices.
+  # @raise [ValueError] If both are matrices and are of different dimensions.
+  def __mul__(self, other):
+    return self.matrix_multiply(other)
 
   # @param other [Matrix] The matrix to indexwise XOR with.
   # @return [Matrix] The result of matrix_1 ^ matrix_2.
