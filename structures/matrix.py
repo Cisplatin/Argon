@@ -57,8 +57,12 @@ class Matrix(object):
   # @param row_2 [Integer] The index of the second row to swap.
   # @return [Matrix] The matrix with the two rows swapped.
   def swap_rows(self, row_1, row_2):
-    # TODO: Write the function.
-    pass
+    self.check_row_index(row_1) and self.check_row_index(row_2)
+    result = self.copy()
+    for index in xrange(self.cols()):
+      result.matrix[row_1][index] = self.matrix[row_2][index]
+      result.matrix[row_2][index] = self.matrix[row_1][index]
+    return result
 
   # @return [Matrix] The transposed matrix.
   def transpose(self):
@@ -174,5 +178,5 @@ class Matrix(object):
   # @param value [Element] The value to set the index to.
   # @raise [InexError] If the index is out-of-bounds.
   def __setitem__(self, row, col, value):
-    check_row_index(row) and check_col_index(col)
+    self.check_row_index(row) and self.check_col_index(col)
     self.matrix[row][col] = value
