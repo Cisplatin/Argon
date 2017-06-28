@@ -23,6 +23,14 @@ class Matrix(object):
   def row(self, index):
     return self[index]
 
+  # @param index [Integer] The index of the column to return.
+  # @return [Array<BaseNum>] The requested column.
+  # @raise [IndexError] If the index is out-of-bounds.
+  def col(self, index):
+    if index < 0 or index >= self.cols():
+      raise IndexError('Index out-of-bounds.')
+    return map(lambda row: row[index], self.matrix)
+
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols(), self.rows())
