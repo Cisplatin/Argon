@@ -105,6 +105,25 @@ class Matrix(object):
         result[col][row] = self.matrix[row][col]
     return result
 
+  # @return [Element] The determinant of the matrix.
+  # @raise [ValueError] If the matrix is not square.
+  def determinant(self):
+    if self.rows() != self.cols():
+      raise ValueError('Cannot find the determinant of non-square matrix.')
+    # @param matrix [Array<Array<?>>] The matrix to find the determinant of.
+    def recurse_determinant(matrix):
+      if len(matrix) == 2:
+        return (matrix[0][0] * matrix[1][1]) - (matrix[0][1] * matrix[1][0])
+      determinant = 0
+      for row in xrange(len(matrix)):
+        new_matrix = map(lambda x: x[1:], matrix[0:row] + matrix[row + 1:])
+        sub_determinant = matrix[row][0] * recurse_determinant(new_matrix)
+        determinant += sub_determinant * (1 if row % 2 == 0 else -1)
+      return determinant
+    if self.rows() == 1:
+      return self[0][0]
+    return recurse_determinant(self.matrix)
+
   # @param func [Element -> Element] The function to operate with.
   # @return [Matrix] The result of the matrix after applying the function.
   def __map(self, func):
