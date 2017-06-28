@@ -23,15 +23,38 @@ class Matrix(object):
   # @return [Array<Element>] The requested row.
   # @raise [IndexError] If the index is out-of-bounds.
   def row(self, index):
-    return self[index]
+    if self.check_row_index(index):
+      return self.matrix[index]
 
   # @param index [Integer] The index of the column to return.
   # @return [Array<Element>] The requested column.
   # @raise [IndexError] If the index is out-of-bounds.
   def col(self, index):
+    if self.check_col_index(index):
+      return map(lambda row: row[index], self.matrix)
+
+  # @param index [Integer] The index to check validity for.
+  # @return [True] If the index is a valid index.
+  # @raise [IndexError] If the index is out-of-bounds.
+  def check_row_index(self, index):
+    if index < 0 or index >= self.rows():
+      raise IndexError('Index out-of-bounds.')
+    return True
+
+  # @param index [Integer] The index to check validity for.
+  # @return [True] If the index is a valid index.
+  # @raise [IndexError] If the index is out-of-bounds.
+  def check_col_index(self, index):
     if index < 0 or index >= self.cols():
       raise IndexError('Index out-of-bounds.')
-    return map(lambda row: row[index], self.matrix)
+    return True
+
+  # @param row_1 [Integer] The index of the first row to swap.
+  # @param row_2 [Integer] The index of the second row to swap.
+  # @raise [IndexError] If one of the indicies is out-of-bounds.
+  def swap_rows(self, row_1, row_2):
+    # TODO
+    pass
 
   # @return [Matrix] The transposed matrix.
   def transpose(self):
@@ -140,15 +163,12 @@ class Matrix(object):
   # @return [Array<Element>] The desired row.
   # @raise [IndexError] If the index is out-of-bounds.
   def __getitem__(self, index):
-    if index < 0 or index >= self.rows():
-      raise IndexError('Index out-of-bounds.')
-    return self.matrix[index]
+    return self.row(index)
 
   # @param row [Integer] The index of the desired row to set.
   # @param col [Integer] The index of the desired column to set.
   # @param value [Element] The value to set the index to.
   # @raise [InexError] If the index is out-of-bounds.
   def __setitem__(self, row, col, value):
-    if row < 0 or row >= self.rows() or col < 0 or col >= self.cols():
-      raise IndexError('Index out-of-bounds.')
-    self.matrix[row][col] = value
+    if check_row_index(row) and check_col_index(col):
+      self.matrix[row][col] = value
