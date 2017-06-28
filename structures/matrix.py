@@ -11,6 +11,10 @@ class Matrix(object):
   def __repr__(self):
     return '\n'.join(map(lambda x: ' '.join(map(str, x)), self.matrix))
 
+  # @return [Matrix] A copy of the current matrix.
+  def copy(self):
+    return self.__map(lambda x: x)
+
   # @return [Integer] The number of rows in the matrix.
   def rows(self):
     return len(self.matrix[0]) if self.matrix != [] else 0
