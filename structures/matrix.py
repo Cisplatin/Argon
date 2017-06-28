@@ -3,7 +3,7 @@ from utils.utils import dot_product
 class Matrix(object):
   # @param rows [Integer] The number of rows required for the matrix.
   # @param cols [Integer] The number of columns required for the matrix.
-  # @param value [BaseNum || None] The value to instantiate the matrix with.
+  # @param value [Element || None] The value to instantiate the matrix with.
   def __init__(self, rows, cols, value=None):
     self.matrix = [[value for i in xrange(cols)] for j in xrange(rows)]
 
@@ -20,13 +20,13 @@ class Matrix(object):
     return len(self.matrix)
 
   # @param index [Integer] The index of the row to return.
-  # @return [Array<BaseNum>] The requested row.
+  # @return [Array<Element>] The requested row.
   # @raise [IndexError] If the index is out-of-bounds.
   def row(self, index):
     return self[index]
 
   # @param index [Integer] The index of the column to return.
-  # @return [Array<BaseNum>] The requested column.
+  # @return [Array<Element>] The requested column.
   # @raise [IndexError] If the index is out-of-bounds.
   def col(self, index):
     if index < 0 or index >= self.cols():
@@ -41,7 +41,7 @@ class Matrix(object):
         result[col][row] = self.matrix[row][col]
     return result
 
-  # @param func [BaseNum -> BaseNum] The function to operate with.
+  # @param func [Element -> Element] The function to operate with.
   # @return [Matrix] The result of the matrix after applying the function.
   def __map(self, func):
     result = Matrix(self.rows(), self.cols())
@@ -51,8 +51,8 @@ class Matrix(object):
     return result
 
   # @param other [Matrix] The other Matrix to operate on.
-  # @param func [BaseNum x BaseNum -> BaseNum] The function to operate with.
-  # @return [Matrix] The result of the two BaseNum with the operator.
+  # @param func [Element x Element -> Element] The function to operate with.
+  # @return [Matrix] The result of the two Element with the operator.
   # @raise [ValueError] If the two matrices are different dimensions.
   def __operate(self, other, func):
     if self.rows() != other.rows() or self.cols() != other.cols():
@@ -87,12 +87,12 @@ class Matrix(object):
         result[row][col] = dot_product(self.row(row), other.col(col))
     return result
 
-  # @param scalar [BaseNum] The scalar to multiply by.
+  # @param scalar [Element] The scalar to multiply by.
   # @return [Matrix] The scalar multiple of the matrix.
   def scalar_multiply(self, scalar):
     return self.__map(lambda x: x * scalar)
 
-  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
+  # @param other [Element || Matrix] The other Matrix multiplied by (or scalar).
   # @return [Matrix] The product of the two matrices (or matrix and scalar).
   # @raise [ValueError] If both are matrices and are of different dimensions.
   def __mul__(self, other):
@@ -100,23 +100,23 @@ class Matrix(object):
       return self.matrix_multiply(other)
     return self.scalar_multiply(other)
 
-  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
+  # @param other [Element || Matrix] The other Matrix multiplied by (or scalar).
   # @return [Matrix] The product of the two matrices (or matrix and scalar).
   # @raise [ValueError] If both are matrices and are of different dimensions.
   def __rmul__(self, other):
     return self.__mul__(other)
 
-  # @param other [BaseNum] The scalar to divide by.
+  # @param other [Element] The scalar to divide by.
   # @return [Matrix] The scalar multiple of the matrix.
   def __div__(self, other):
     return self.__map(lambda x: x / other)
 
-  # @param other [BaseNum] The scalar to floor divide by.
+  # @param other [Element] The scalar to floor divide by.
   # @return [Matrix] The scalar multiple of the matrix.
   def __floordiv__(self, other):
     return self.__map(lambda x: x // other)
 
-  # @param other [BaseNum] The scalar to modulos by.
+  # @param other [Element] The scalar to modulos by.
   # @return [Matrix] The matrix with each element modulos'd by the scalar given.
   def __mod__(self, other):
     return self.__map(lambda x: x % other)
@@ -137,7 +137,7 @@ class Matrix(object):
     return self.__operate(other, lambda x, y: x | y)
 
   # @param index [Integer] The index of the desired row.
-  # @return [Array<BaseNum>] The desired row.
+  # @return [Array<Element>] The desired row.
   # @raise [IndexError] If the index is out-of-bounds.
   def __getitem__(self, index):
     if index < 0 or index >= self.rows():
@@ -146,7 +146,7 @@ class Matrix(object):
 
   # @param row [Integer] The index of the desired row to set.
   # @param col [Integer] The index of the desired column to set.
-  # @param value [BaseNum] The value to set the index to.
+  # @param value [Element] The value to set the index to.
   # @raise [InexError] If the index is out-of-bounds.
   def __setitem__(self, row, col, value):
     if row < 0 or row >= self.rows() or col < 0 or col >= self.cols():
