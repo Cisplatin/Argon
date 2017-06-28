@@ -4,8 +4,21 @@ class Matrix(object):
   # @param rows [Integer] The number of rows required for the matrix.
   # @param cols [Integer] The number of columns required for the matrix.
   # @param value [Element || None] The value to instantiate the matrix with.
+  # @raise [ValueError] If a dimension is non-positive.
   def __init__(self, rows, cols, value=None):
+    if rows <= 0 or cols <= 0:
+      raise ValueError('Cannot create matrix with non-positive dimensions.')
     self.matrix = [[value for i in xrange(cols)] for j in xrange(rows)]
+
+  # @param dimensions [Integer] The length of a row/column for the matrix.
+  # @return [Matrix] The identity matrix with the given dimensions.
+  # @raise [ValueError] If the dimension is non-positive.
+  @staticmethod
+  def identity(dimensions):
+    matrix = Matrix(dimensions, dimensions, 0)
+    for index in xrange(dimensions):
+      matrix[index][index] = 1
+    return matrix
 
   # @return [String] The data representation.
   def __repr__(self):
