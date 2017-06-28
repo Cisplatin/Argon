@@ -78,11 +78,28 @@ class Matrix(object):
         result[row][col] = dot_product(self.row(row), other.col(col))
     return result
 
-  # @param other [Matrix] The other Matrix subtracted to.
-  # @return [Matrix] The difference of the two matrices.
+  # @param scalar [BaseNum] The scalar to multiply by.
+  # @return [Matrix] The scalar multiple of the matrix.
+  def scalar_multiply(self, scalar):
+    result = Matrix(self.rows(), self.cols())
+    for row in xrange(self.rows()):
+      for col in xrange(self.cols()):
+        result[row][col] = scalar * self.matrix[row][col]
+    return result
+
+  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
+  # @return [Matrix] The product of the two matrices (or matrix and scalar).
   # @raise [ValueError] If both are matrices and are of different dimensions.
   def __mul__(self, other):
-    return self.matrix_multiply(other)
+    if type(other) == type(self):
+      return self.matrix_multiply(other)
+    return self.scalar_multiply(other)
+
+  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
+  # @return [Matrix] The product of the two matrices (or matrix and scalar).
+  # @raise [ValueError] If both are matrices and are of different dimensions.
+  def __rmul__(self, other):
+    return self.__mul__(other)
 
   # @param other [Matrix] The matrix to indexwise XOR with.
   # @return [Matrix] The result of matrix_1 ^ matrix_2.
