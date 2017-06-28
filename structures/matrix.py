@@ -74,6 +74,16 @@ class Matrix(object):
       result.matrix[row][index] *= scalar
     return result
 
+  # @param row_1 [Integer] The index of the row to add to.
+  # @param row_2 [Integer] The index of the row to add from.
+  # @return [Matrix] The matrix with the rows added.
+  def add_rows(self, row_1, row_2):
+    self.check_row_index(row_1) and self.check_row_index(row_2)
+    result = self.copy()
+    for index in xrange(self.cols()):
+      result.matrix[row_1][index] += result.matrix[row_2][index]
+    return result
+
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols(), self.rows())
