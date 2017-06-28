@@ -100,6 +100,11 @@ class Matrix(object):
       return self.matrix_multiply(other)
     return self.scalar_multiply(other)
 
+  # @param other [BaseNum] The scalar to divide by.
+  # @return [Matrix] The scalar multiple of the matrix.
+  def __div__(self, other):
+    return self.__map(lambda x: x / other)
+
   # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
   # @return [Matrix] The product of the two matrices (or matrix and scalar).
   # @raise [ValueError] If both are matrices and are of different dimensions.
