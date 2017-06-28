@@ -23,15 +23,15 @@ class Matrix(object):
   # @return [Array<Element>] The requested row.
   # @raise [IndexError] If the index is out-of-bounds.
   def row(self, index):
-    if self.check_row_index(index):
-      return self.matrix[index]
+    self.check_row_index(index)
+    return self.matrix[index]
 
   # @param index [Integer] The index of the column to return.
   # @return [Array<Element>] The requested column.
   # @raise [IndexError] If the index is out-of-bounds.
   def col(self, index):
-    if self.check_col_index(index):
-      return map(lambda row: row[index], self.matrix)
+    self.check_col_index(index)
+    return map(lambda row: row[index], self.matrix)
 
   # @param index [Integer] The index to check validity for.
   # @return [True] If the index is a valid index.
@@ -163,5 +163,5 @@ class Matrix(object):
   # @param value [Element] The value to set the index to.
   # @raise [InexError] If the index is out-of-bounds.
   def __setitem__(self, row, col, value):
-    if check_row_index(row) and check_col_index(col):
-      self.matrix[row][col] = value
+    check_row_index(row) and check_col_index(col)
+    self.matrix[row][col] = value
