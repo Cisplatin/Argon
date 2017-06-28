@@ -94,7 +94,7 @@ class Matrix(object):
   # @param other [Matrix] The other Matrix to multiply by.
   # @return [Matrix] The product of the two matrices.
   # @raise [ValueError] If the two Matrices are of incorrect dimensions.
-  def matrix_multiply(self, other):
+  def __matrix_multiply(self, other):
     if self.cols() != other.rows():
       raise ValueError('Cannot multiply matrices of incorrect dimensions.')
     result = Matrix(self.rows(), other.cols())
@@ -105,7 +105,7 @@ class Matrix(object):
 
   # @param scalar [Element] The scalar to multiply by.
   # @return [Matrix] The scalar multiple of the matrix.
-  def scalar_multiply(self, scalar):
+  def __scalar_multiply(self, scalar):
     return self.__map(lambda x: x * scalar)
 
   # @param other [Element || Matrix] The other Matrix multiplied by (or scalar).
@@ -113,8 +113,8 @@ class Matrix(object):
   # @raise [ValueError] If both are matrices and are of different dimensions.
   def __mul__(self, other):
     if type(other) == type(self):
-      return self.matrix_multiply(other)
-    return self.scalar_multiply(other)
+      return self.__matrix_multiply(other)
+    return self.__scalar_multiply(other)
 
   # @param other [Element || Matrix] The other Matrix multiplied by (or scalar).
   # @return [Matrix] The product of the two matrices (or matrix and scalar).
