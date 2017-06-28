@@ -1,3 +1,5 @@
+from utils.utils import dot_product
+
 class Matrix(object):
   # @param rows [Integer] The number of rows required for the matrix.
   # @param cols [Integer] The number of columns required for the matrix.
@@ -73,8 +75,7 @@ class Matrix(object):
     result = Matrix(self.rows(), other.cols())
     for row in xrange(self.rows()):
       for col in xrange(self.cols()):
-        multiply = (lambda x: reduce(lambda y, z: y * z, x))
-        result[row][col] = sum(map(multiply, zip(self.row(row), other.col(col))))
+        result[row][col] = dot_product(self.row(row), other.col(col))
     return result
 
   # @param other [Matrix] The other Matrix subtracted to.
