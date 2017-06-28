@@ -41,6 +41,15 @@ class Matrix(object):
         result[col][row] = self.matrix[row][col]
     return result
 
+  # @param func [BaseNum -> BaseNum] The function to operate with.
+  # @return [Matrix] The result of the matrix after applying the function.
+  def __map(self, func):
+    result = Matrix(self.rows(), self.cols())
+    for row in xrange(self.rows()):
+      for col in xrange(self.cols()):
+        result[row][col] = func(self[row][col])
+    return result
+
   # @param other [Matrix] The other Matrix to operate on.
   # @param func [BaseNum x BaseNum -> BaseNum] The function to operate with.
   # @return [Matrix] The result of the two BaseNum with the operator.
@@ -81,11 +90,7 @@ class Matrix(object):
   # @param scalar [BaseNum] The scalar to multiply by.
   # @return [Matrix] The scalar multiple of the matrix.
   def scalar_multiply(self, scalar):
-    result = Matrix(self.rows(), self.cols())
-    for row in xrange(self.rows()):
-      for col in xrange(self.cols()):
-        result[row][col] = scalar * self.matrix[row][col]
-    return result
+    return self.__map(lambda x: x * scalar)
 
   # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
   # @return [Matrix] The product of the two matrices (or matrix and scalar).
