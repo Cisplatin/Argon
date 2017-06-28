@@ -100,6 +100,12 @@ class Matrix(object):
       return self.matrix_multiply(other)
     return self.scalar_multiply(other)
 
+  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
+  # @return [Matrix] The product of the two matrices (or matrix and scalar).
+  # @raise [ValueError] If both are matrices and are of different dimensions.
+  def __rmul__(self, other):
+    return self.__mul__(other)
+
   # @param other [BaseNum] The scalar to divide by.
   # @return [Matrix] The scalar multiple of the matrix.
   def __div__(self, other):
@@ -110,11 +116,10 @@ class Matrix(object):
   def __floordiv__(self, other):
     return self.__map(lambda x: x // other)
 
-  # @param other [BaseNum || Matrix] The other Matrix multiplied by (or scalar).
-  # @return [Matrix] The product of the two matrices (or matrix and scalar).
-  # @raise [ValueError] If both are matrices and are of different dimensions.
-  def __rmul__(self, other):
-    return self.__mul__(other)
+  # @param other [BaseNum] The scalar to modulos by.
+  # @return [Matrix] The matrix with each element modulos'd by the scalar given.
+  def __mod__(self, other):
+    return self.__map(lambda x: x % other)
 
   # @param other [Matrix] The matrix to indexwise XOR with.
   # @return [Matrix] The result of matrix_1 ^ matrix_2.
