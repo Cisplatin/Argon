@@ -64,6 +64,16 @@ class Matrix(object):
       result.matrix[row_2][index] = self.matrix[row_1][index]
     return result
 
+  # @param row [Integer] The index of the row to multiply.
+  # @param scalar [Element] The scalar to multiply the row by.
+  # @return [Matrix] The matrix with the row multiplied by the given scalar.
+  def multiply_row(self, row, scalar):
+    self.check_row_index(row)
+    result = self.copy()
+    for index in xrange(self.cols()):
+      result.matrix[row][index] *= scalar
+    return result
+
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols(), self.rows())
