@@ -49,13 +49,6 @@ class Matrix(object):
       raise IndexError('Index out-of-bounds.')
     return True
 
-  # @param row_1 [Integer] The index of the first row to swap.
-  # @param row_2 [Integer] The index of the second row to swap.
-  # @raise [IndexError] If one of the indicies is out-of-bounds.
-  def swap_rows(self, row_1, row_2):
-    # TODO
-    pass
-
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols(), self.rows())
