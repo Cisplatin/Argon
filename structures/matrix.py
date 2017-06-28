@@ -17,6 +17,12 @@ class Matrix(object):
   def cols(self):
     return len(self.matrix)
 
+  # @param index [Integer] The index of the row to return.
+  # @return [Array<BaseNum>] The requested row.
+  # @raise [IndexError] If the index is out-of-bounds.
+  def row(self, index):
+    return self[index]
+
   # @return [Matrix] The transposed matrix.
   def transpose(self):
     result = Matrix(self.cols(), self.rows())
@@ -45,10 +51,24 @@ class Matrix(object):
     return self.__operate(other, lambda x, y: x + y)
 
   # @param other [Matrix] The other Matrix subtracted to.
-  # @return [Matrix] The difference of the two Matrixs.
-  # @raise [ValueError] If the two Matrices are of different types.
+  # @return [Matrix] The difference of the two matrices.
+  # @raise [ValueError] If the two Matrices are of different dimensions.
   def __sub__(self, other):
     return self.__operate(other, lambda x, y: x - y)
+
+  """
+  # @param other [Matrix] The other Matrix to multiply by.
+  # @return [Matrix] The product of the two matrices.
+  # @raise [ValueError] If the two Matrices are of incorrect dimensions.
+  def matrix_multiply(self, other):
+    if self.cols() != other.rows():
+      raise ValueError('Cannot multiply matrices of incorrect dimensions.')
+    result = Matrix(self.rows(), other.cols())
+    for row in xrange(self.rows()):
+      for col in xrange(self.cols()):
+        # TODO
+        pass
+  """
 
   # @param other [Matrix] The matrix to indexwise XOR with.
   # @return [Matrix] The result of matrix_1 ^ matrix_2.
